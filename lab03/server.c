@@ -9,7 +9,16 @@
 #define QUEUE_SIZE 5
 
 
+void *thread_func(void *sock)
+{
+	int asock = *((int*)sock);
+	char buffer[80];
+	int error = recv(asock, buffer, sizeof(buffer), 0);
 
+	// send file
+	send_file(buffer, asock);
+	close(asock);
+}
 
 void main (int argc, char *argv[])
 {
