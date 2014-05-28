@@ -23,6 +23,9 @@ static char arg1_input[WRITE_SIZE];
 static char arg2_input[WRITE_SIZE];
 static char operation_input[WRITE_SIZE];
 
+/*
+ * arg1 write handler
+ */
 int write_arg1(struct file *file, const char *buf, unsigned long count, void *data)
 {
 	if(count > WRITE_SIZE) {
@@ -34,6 +37,9 @@ int write_arg1(struct file *file, const char *buf, unsigned long count, void *da
 	return count;
 }
 
+/*
+ * arg2 write handler
+ */
 int write_arg2(struct file *file, const char *buf, unsigned long count, void *data)
 {
 	if(count > WRITE_SIZE) {
@@ -45,6 +51,9 @@ int write_arg2(struct file *file, const char *buf, unsigned long count, void *da
 	return count;
 }
 
+/*
+ * operation write handler
+ */
 int write_operation(struct file *file, const char *buf, unsigned long count, void *data)
 {
 	if(count > WRITE_SIZE) {
@@ -56,6 +65,9 @@ int write_operation(struct file *file, const char *buf, unsigned long count, voi
 	return count;
 }
 
+/*
+ * result read handler
+ */
 int read_result(char *buffer, char **buffer_location,
                   off_t offset, int buffer_length, int *eof, void *data)
 {
