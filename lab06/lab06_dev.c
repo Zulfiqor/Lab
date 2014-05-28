@@ -32,47 +32,4 @@ static ssize_t write_handler(struct file *filp, const char *buff,
 	return count;
 }
 
-static const struct file_operations fops = {
-	.owner = THIS_MODULE,
-	.write = write_handler
-};
 
-static struct miscdevice lab06_dev = {
-	MISC_DYNAMIC_MINOR,
-	"lab06",
-	&fops
-};
-
-static int __init lab_init(void)
-{
-	int ret;
-	ret = misc_register(&lab06_dev);
-	if (ret) {
-		printk(KERN_ERR "Unable to register \"Lab06\" device\n");
-	}
-
-	setup_timer(&timer, time_handler, 0);
-
-	ret = mod_timer(&timer, jiffies + msecs_to_jiffies(timeout));
-	if (ret) {
-		printk(KERN_ERR "Error in mod_timer\n");
-	}
-
-
-	return ret;
-}
-
-module_init(lab_init);
-
-static void __exit lab_exit(void)
-{
-	misc_deregister(&lab06_dev);
-	del_timer(&timer);
-}
-
-module_exit(lab_exit);
-
-MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Dmitry Dolenko, Wladimir Litvinov");
-MODULE_DESCRIPTION("\"Lab06\" module");
-MODULE_VERSION("dev");
