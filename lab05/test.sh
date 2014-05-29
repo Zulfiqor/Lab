@@ -1,7 +1,7 @@
-fs="$1"
+fs="sys"
 
-echo "$2" > /$fs/calc/arg1
-echo "$4" > /$fs/calc/arg2
-echo "$3" > /$fs/calc/operation
+echo "1" > /$fs/calc/arg1
+echo "1" > /$fs/calc/arg2
+echo "+" > /$fs/calc/operation
 
 cat /$fs/calc/result
